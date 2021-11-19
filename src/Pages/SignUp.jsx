@@ -1,12 +1,13 @@
-/* eslint-disable arrow-body-style */
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/function-component-definition */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { Headline, StyledButton, Form } from '../Styles/styleOverall';
 import { signUpUser } from '../Services/api.services';
+import { signUpSchema } from '../Validation/Schemes';
 
-const SignUp = () => {
+function SignUp() {
   const history = useHistory();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -23,9 +24,15 @@ const SignUp = () => {
       passwordConfirmation,
     };
 
+    const isInputInvalid = signUpSchema.validate(body).error;
+
+    if (isInputInvalid) {
+      alert(isInputInvalid);
+      return;
+    }
+
     signUpUser(body)
-      // eslint-disable-next-line no-unused-vars
-      .then((res) => history.push('/sign-in'))
+      .then(history.push('/sign-in'))
       .catch((err) => alert(`Houve um erro ao realizar o cadastro! Por favor, tente novamente!', ${err}`));
   }
 
@@ -35,7 +42,7 @@ const SignUp = () => {
         Bem vindo ao
         <span> GratiBox</span>
       </SignUpHeadline>
-      <Form onSubmit={() => handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Nome"
@@ -74,7 +81,7 @@ const SignUp = () => {
       </Form>
     </>
   );
-};
+}
 
 export default SignUp;
 

@@ -9,7 +9,7 @@ import {
   Form,
   StyledLink,
 } from '../Styles/styleOverall';
-import { signUpUser } from '../Services/api.services';
+import { signInUser } from '../Services/api.services';
 
 const SignIn = () => {
   const history = useHistory();
@@ -24,10 +24,10 @@ const SignIn = () => {
       password,
     };
 
-    signUpUser(body)
+    signInUser(body)
       // eslint-disable-next-line no-unused-vars
-      .then((res) => history.push('/sign-in'))
-      .catch((err) => alert(`Houve um erro ao realizar o cadastro! Por favor, tente novamente!', ${err}`));
+      .then((res) => history.push('/'))
+      .catch((err) => alert(`Houve um erro ao realizar o login! Por favor, tente novamente!', ${err}`));
   }
 
   return (
