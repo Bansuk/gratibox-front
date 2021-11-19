@@ -3,24 +3,25 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { Headline, StyledButton, Form } from '../Styles/styleOverall';
+import {
+  Headline,
+  StyledButton,
+  Form,
+  StyledLink,
+} from '../Styles/styleOverall';
 import { signUpUser } from '../Services/api.services';
 
-const SignUp = () => {
+const SignIn = () => {
   const history = useHistory();
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
 
     const body = {
-      name,
       email,
       password,
-      passwordConfirmation,
     };
 
     signUpUser(body)
@@ -31,19 +32,11 @@ const SignUp = () => {
 
   return (
     <>
-      <SignUpHeadline>
+      <SignInHeadline>
         Bem vindo ao
         <span> GratiBox</span>
-      </SignUpHeadline>
+      </SignInHeadline>
       <Form onSubmit={() => handleSubmit}>
-        <input
-          type="text"
-          placeholder="Nome"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          maxLength="50"
-          required
-        />
         <input
           type="email"
           placeholder="Email"
@@ -61,31 +54,27 @@ const SignUp = () => {
           maxLength="64"
           required
         />
-        <input
-          type="password"
-          placeholder="Confirmar senha"
-          value={passwordConfirmation}
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-          minLength="8"
-          maxLength="64"
-          required
-        />
-        <SignUpButton>Cadastrar</SignUpButton>
+        <SignInButton>Login</SignInButton>
+        <SignInLink>Ainda não sou grato</SignInLink>
       </Form>
     </>
   );
 };
 
-export default SignUp;
+export default SignIn;
 
-const SignUpHeadline = styled(Headline)`
+const SignInHeadline = styled(Headline)`
   text-align: center;
   margin-bottom: 43px;
 `;
 
-const SignUpButton = styled(StyledButton)`
+const SignInButton = styled(StyledButton)`
   font-size: 36px;
-  margin-top: 62px;
+  margin-top: 144px;
   height: 56px;
   width: 70vw;
+`;
+
+const SignInLink = styled(StyledLink)`
+  margin-top: 15px;
 `;
