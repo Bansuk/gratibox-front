@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { Headline, Subheadline } from './styleText.js';
-import { StyledButton } from './styleButton.js';
+import { Headline, Subheadline, StyledButton } from './styleOverall';
 
 const HomeContainer = styled.div`
   align-items: center;

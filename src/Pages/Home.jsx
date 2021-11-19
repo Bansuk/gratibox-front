@@ -11,7 +11,7 @@ import {
   HomeStyledButton,
   ImageContainer,
 } from '../Styles/styleHome';
-import { StyledLink } from '../Styles/styleButton.js';
+import { StyledLink } from '../Styles/styleOverall';
 
 const Home = () => {
   const history = useHistory();
