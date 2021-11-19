@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const StyledButton = styled.button`
   background-color: #8c97ea;
   border-radius: 10px;
+  font-weight: 700;
 `;
 
 const StyledLink = styled.span`
