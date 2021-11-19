@@ -1,6 +1,7 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/function-component-definition */
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import homeImage from '../Assets/meditation_woman_home.png';
 import {
   HomeContainer,
@@ -13,6 +14,8 @@ import {
 import { StyledLink } from '../Styles/styleButton.js';
 
 const Home = () => {
+  const history = useHistory();
+
   return (
     <HomeContainer>
       <HomeHeadline>
@@ -25,9 +28,13 @@ const Home = () => {
       </HomeSubheadline>
       <ImageContainer>
         <HomeImage src={homeImage} alt="pessoa meditando ao por do sol" />
-        <HomeStyledButton>Quero começar</HomeStyledButton>
+        <HomeStyledButton onClick={() => history.push('/sign-up')}>
+          Quero começar
+        </HomeStyledButton>
       </ImageContainer>
-      <StyledLink>Já sou grato</StyledLink>
+      <StyledLink onClick={() => history.push('/sign-in')}>
+        Já sou grato
+      </StyledLink>
     </HomeContainer>
   );
 };
