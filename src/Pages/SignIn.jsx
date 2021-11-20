@@ -1,5 +1,5 @@
-/* eslint-disable arrow-body-style */
-/* eslint-disable react/function-component-definition */
+/* eslint-disable react/jsx-no-bind */
+// eslint-disable-next-line react/jsx-no-bind
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
@@ -10,8 +10,11 @@ import {
   StyledLink,
 } from '../Styles/styleOverall';
 import { signInUser } from '../Services/api.services';
+import validateUserInput from '../Helpers/Validation';
+import { userPersistance, decodeToken } from '../Helpers/TokenHandler';
 
-const SignIn = () => {
+// eslint-disable-next-line react/prop-types
+const SignIn = function signIn({ setUser }) {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,10 +27,20 @@ const SignIn = () => {
       password,
     };
 
+    if (validateUserInput(body, 'sign-in')) return;
+
     signInUser(body)
-      // eslint-disable-next-line no-unused-vars
-      .then(history.push('/'))
-      .catch((err) => alert(`Houve um erro ao realizar o login! Por favor, tente novamente!', ${err}`));
+      .then((res) => {
+        const { token } = res.data;
+        setUser(token);
+        userPersistance(token);
+        if (decodeToken(token).userHasSubscription) history.push('/subscription');
+        else history.push('/plans');
+      })
+      .catch((err) => {
+        if (err.response?.status === 401) alert('Usuário ou senha incorretos!');
+        else alert('Houve um erro ao realizar o login! Por favor, tente novamente!');
+      });
   }
 
   return (
@@ -36,7 +49,7 @@ const SignIn = () => {
         Bem vindo ao
         <span> GratiBox</span>
       </SignInHeadline>
-      <Form onSubmit={() => handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <input
           type="email"
           placeholder="Email"
@@ -55,7 +68,7 @@ const SignIn = () => {
           required
         />
         <SignInButton>Login</SignInButton>
-        <SignInLink>Ainda não sou grato</SignInLink>
+        <SignInLink onClick={() => history.push('/sign-up')}>Ainda não sou grato</SignInLink>
       </Form>
     </>
   );

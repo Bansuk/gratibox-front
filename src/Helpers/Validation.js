@@ -1,7 +1,13 @@
-import { signUpSchema } from '../Validation/Schemes';
+import { signUpSchema, signInSchema } from '../Validation/Schemes';
 
-function validateUserInput(body) {
-  const isInputInvalid = signUpSchema.validate(body).error;
+function validateUserInput(body, page) {
+  let isInputInvalid;
+  if (page === 'sign-up') {
+    isInputInvalid = signUpSchema.validate(body).error;
+  } else {
+    isInputInvalid = signInSchema.validate(body).error;
+  }
+
   const errorMessage = isInputInvalid && JSON.stringify(isInputInvalid.details[0].message);
 
   if (errorMessage?.includes('name')) {

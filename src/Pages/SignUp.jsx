@@ -23,7 +23,7 @@ const SignUp = function signUp() {
       passwordConfirmation,
     };
 
-    if (validateUserInput(body)) return;
+    if (validateUserInput(body, 'sign-up')) return;
 
     signUpUser(body)
       .then(history.push('/sign-in'))
