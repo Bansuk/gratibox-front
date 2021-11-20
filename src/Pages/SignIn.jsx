@@ -11,7 +11,7 @@ import {
 } from '../Styles/styleOverall';
 import { signInUser } from '../Services/api.services';
 import validateUserInput from '../Helpers/Validation';
-import userPersistance from '../Helpers/User';
+import { userPersistance, decodeToken } from '../Helpers/TokenHandler';
 
 // eslint-disable-next-line react/prop-types
 const SignIn = function signIn({ setUser }) {
@@ -34,9 +34,13 @@ const SignIn = function signIn({ setUser }) {
         const { token } = res.data;
         setUser(token);
         userPersistance(token);
-        history.push('/');
+        if (decodeToken(token).userHasSubscription) history.push('/subscription');
+        else history.push('/plans');
       })
-      .catch((err) => alert(`Houve um erro ao realizar o login! Por favor, tente novamente!', ${err}`));
+      .catch((err) => {
+        if (err.response?.status === 401) alert('Usuário ou senha incorretos!');
+        else alert('Houve um erro ao realizar o login! Por favor, tente novamente!');
+      });
   }
 
   return (
