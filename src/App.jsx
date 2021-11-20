@@ -10,6 +10,7 @@ import SignUp from './Pages/SignUp';
 import SignIn from './Pages/SignIn';
 import GlobalStyle from './Styles/styleGlobal';
 import UserContext from './Contexts/UserContext';
+import Plans from './Pages/Plans';
 
 const App = () => {
   const [user, setUser] = useState('');
@@ -27,6 +28,9 @@ const App = () => {
           <Route path="/sign-in" exact>
             <SignIn setUser={setUser} />
           </Route>
+        </Switch>
+        <Switch>
+          <Route path="/plans" exact component={Plans} />
         </Switch>
       </BrowserRouter>
     </UserContext.Provider>
