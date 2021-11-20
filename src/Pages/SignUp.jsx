@@ -1,13 +1,12 @@
 /* eslint-disable react/jsx-no-bind */
-/* eslint-disable react/function-component-definition */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { Headline, StyledButton, Form } from '../Styles/styleOverall';
 import { signUpUser } from '../Services/api.services';
-import { signUpSchema } from '../Validation/Schemes';
+import validateUserInput from '../Helpers/Validation';
 
-function SignUp() {
+const SignUp = function signUp() {
   const history = useHistory();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -24,12 +23,7 @@ function SignUp() {
       passwordConfirmation,
     };
 
-    const isInputInvalid = signUpSchema.validate(body).error;
-
-    if (isInputInvalid) {
-      alert(isInputInvalid);
-      return;
-    }
+    if (validateUserInput(body)) return;
 
     signUpUser(body)
       .then(history.push('/sign-in'))
@@ -81,7 +75,7 @@ function SignUp() {
       </Form>
     </>
   );
-}
+};
 
 export default SignUp;
 

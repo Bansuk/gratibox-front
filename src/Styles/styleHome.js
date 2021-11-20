@@ -37,11 +37,11 @@ const ImageContainer = styled.div`
 `;
 
 const HomeBottomBackground = styled.div`
-  text-align: center;
   background-color: #4d65a8;
-  width: 100%;
   height: 15.2vh;
   margin-top: -1px;
+  text-align: center;
+  width: 100%;
 
   & span {
     background-color: #4d65a8;

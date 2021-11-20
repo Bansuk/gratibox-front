@@ -25,6 +25,7 @@ const SignIn = () => {
     };
 
     signInUser(body)
+      // eslint-disable-next-line no-unused-vars
       .then(history.push('/'))
       .catch((err) => alert(`Houve um erro ao realizar o login! Por favor, tente novamente!', ${err}`));
   }
