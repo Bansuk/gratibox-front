@@ -1,5 +1,3 @@
-/* eslint-disable arrow-body-style */
-/* eslint-disable react/function-component-definition */
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import homeImage from '../Assets/meditation_woman_home.png';
@@ -10,10 +8,11 @@ import {
   HomeImage,
   HomeStyledButton,
   ImageContainer,
+  HomeBottomBackground,
 } from '../Styles/styleHome';
 import { StyledLink } from '../Styles/styleOverall';
 
-const Home = () => {
+const Home = function Home() {
   const history = useHistory();
 
   return (
@@ -32,9 +31,11 @@ const Home = () => {
           Quero começar
         </HomeStyledButton>
       </ImageContainer>
-      <StyledLink onClick={() => history.push('/sign-in')}>
-        Já sou grato
-      </StyledLink>
+      <HomeBottomBackground>
+        <StyledLink onClick={() => history.push('/sign-in')}>
+          Já sou grato
+        </StyledLink>
+      </HomeBottomBackground>
     </HomeContainer>
   );
 };

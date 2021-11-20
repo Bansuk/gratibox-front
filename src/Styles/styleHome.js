@@ -22,6 +22,7 @@ const HomeImage = styled.img`
 `;
 
 const HomeStyledButton = styled(StyledButton)`
+  font-size: 18px;
   height: 45px;
   margin-bottom: 15px;
   position: absolute;
@@ -35,6 +36,18 @@ const ImageContainer = styled.div`
   position: relative;
 `;
 
+const HomeBottomBackground = styled.div`
+  text-align: center;
+  background-color: #4d65a8;
+  width: 100%;
+  height: 15.2vh;
+  margin-top: -1px;
+
+  & span {
+    background-color: #4d65a8;
+  }
+`;
+
 export {
   HomeContainer,
   HomeHeadline,
@@ -42,4 +55,5 @@ export {
   HomeImage,
   HomeStyledButton,
   ImageContainer,
+  HomeBottomBackground,
 };
