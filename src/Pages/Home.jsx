@@ -12,7 +12,7 @@ import {
 } from '../Styles/styleHome';
 import { StyledLink } from '../Styles/styleOverall';
 
-const Home = function Home() {
+const Home = function home() {
   const history = useHistory();
 
   return (
