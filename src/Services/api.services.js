@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { configToken } from '../Helpers/TokenHandler';
 
 const URL = 'http://localhost:4000/';
 
@@ -10,4 +11,8 @@ function signInUser(body) {
   return axios.post(`${URL}sign-in`, body);
 }
 
-export { signUpUser, signInUser };
+function getPlans(token) {
+  return axios.get(`${URL}plans`, configToken(token));
+}
+
+export { signUpUser, signInUser, getPlans };
