@@ -11,7 +11,17 @@ function decodeToken(token) {
   const userName = decoded.name.includes(' ')
     ? decoded.name.substr(0, decoded.name.indexOf(' '))
     : decoded.name;
-  return { userId: decoded.id, userName, userHasSubscription: decoded.hasSubscription };
+  return {
+    userId: decoded.id,
+    userName,
+    userHasSubscription: decoded.hasSubscription,
+  };
 }
 
-export { userPersistance, decodeToken };
+function configToken(token) {
+  return {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+}
+
+export { userPersistance, decodeToken, configToken };

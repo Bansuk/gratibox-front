@@ -1,16 +1,13 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
-import planImage from '../Assets/istockphoto-1201318093-170667a 1.png';
 import { StyledButton } from '../Styles/styleOverall';
 
-const PlanCard = function card() {
+const PlanCard = function card({ plan }) {
   return (
     <CardContainer>
-      <img src={planImage} alt="a" />
-      <span>
-        Você recebe um box por semana. Ideal para quem quer exercer a gratidão
-        todos os dias.
-      </span>
+      <img src={plan.image} alt={plan.image_alt} />
+      <span>{plan.description}</span>
       <CardStyledButtom>Assinar</CardStyledButtom>
     </CardContainer>
   );
@@ -24,12 +21,13 @@ const CardContainer = styled.div`
   border-radius: 25px;
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  margin-bottom: 30px;
   width: 95vw;
   height: 400px;
 
   & img {
-    width: 90%;
+    width: 300px;
+    height: 225px;
     background-color: #e5cdb3;
     margin-top: 2px;
   }
